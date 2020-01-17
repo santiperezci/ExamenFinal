@@ -1,0 +1,43 @@
+    type Query{
+      getAutor(nombre:String!):Autores
+      getEntradas(nombre: String):[Entradas]
+    }
+
+
+
+    type Mutation{
+      addAutor(nombre:String!,contrasena:String!):Autores!
+      addEntrada(nombre:String!,token:ID!,date:String!,asunto:String!,message:String!):Entradas!
+      login(nombre:String!,contrasena:String!):Autores!
+      logout(nombre:String!,token:ID!):Autores!      
+      removeAutor(nombre:String!,token:ID!):String
+      removeEntrada(nombre:String!,token:ID!,id:ID!):String
+    }
+  
+
+
+    type Autores{
+      _id: ID!
+      nombre: String!
+      contrasena: String!
+      token : ID!
+      entradas : [Entradas]
+    }
+
+
+
+    type Entradas{
+      _id: ID!
+      idAutor : ID!
+      date: String!
+      asunto: String!
+      message: String!
+      blogger: Autores
+    }
+
+
+
+    type Subscription{
+      tellAutor(id:ID!):Entradas
+      tellEntradaAsunto(asunto:String!):Entradas
+    }
